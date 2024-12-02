@@ -13,4 +13,4 @@ If you need any assistance with this script then join my Discord (https://discor
 
 ---
 
-The TX events this script currently supports can be found [here](https://github.com/Solar-Scripts/txLogs/releases/tag/v1)
+The TX events this script currently supports can be found [here](https://github.com/Solar-Scripts/txLogs/releases/)
