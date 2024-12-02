@@ -27,7 +27,7 @@ end)
 
 -- Player Warned Event
 AddEventHandler('txAdmin:events:playerWarned', function(eventData)
-    local idName = GetPlayerName(eventData.target) or "Unknown Player"
+    local idName = GetPlayerName(eventData.targetName) or "Unknown Player"
     local reason = eventData.reason or "No reason provided"
     local author = eventData.author or "Unknown Moderator"
     local actionId = eventData.actionId or "N/A"
@@ -38,7 +38,7 @@ AddEventHandler('txAdmin:events:playerWarned', function(eventData)
             color = 15445283,
             fields = {
                 { name = "Player", value = idName, inline = true },
-                { name = "Player ID", value = tostring(eventData.target), inline = true },
+                { name = "Player ID", value = tostring(eventData.targetName), inline = true },
                 { name = "Reason", value = reason, inline = true },
                 { name = "Moderator", value = author, inline = true },
                 { name = "Action ID", value = actionId, inline = true }
