@@ -85,7 +85,7 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData)
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
 end)
 
--- Player Healed (or Messaged) Event
+-- Player Messaged Event
 AddEventHandler('txAdmin:events:playerDirectMessage', function(eventData)
     local idName = GetPlayerName(eventData.target) or "Unknown Player"
     local author = eventData.author or "Unknown Moderator"
