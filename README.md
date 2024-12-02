@@ -6,5 +6,11 @@ A logging system for txAdmin moderation actions.
 3. Drop the contents of the zip into your txLogs folder.
 4. Add the line "ensure txLogs" to your server.cfg file.
 5. Open the "config.lua in your txLogs folder, and add in your webhook links. Information on creating a webhook can be found [here](https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks).
-<br>
-*If you need any assistance with this script then join my Discord (https://discord.gg/CpcAAdqNEN/).*
+
+---
+
+If you need any assistance with this script then join my Discord (https://discord.gg/CpcAAdqNEN/).
+
+---
+
+The TX events this script currently supports can be found [here](https://github.com/Solar-Scripts/txLogs/releases/tag/v1)
