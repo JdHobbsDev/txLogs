@@ -9,10 +9,10 @@ AddEventHandler('txAdmin:events:playerKicked', function(eventData)
             title = "__Player Kicked__",
             color = 15445283,
             fields = {
-                { name = "Player", value = idName, inline = false },
-                { name = "Player ID", value = tostring(eventData.target), inline = false },
-                { name = "Reason", value = reason, inline = false },
-                { name = "Moderator", value = author, inline = false }
+                { name = "Player", value = idName, inline = true },
+                { name = "Player ID", value = tostring(eventData.target), inline = true },
+                { name = "Reason", value = reason, inline = true },
+                { name = "Moderator", value = author, inline = true }
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -27,7 +27,7 @@ end)
 
 -- Player Warned Event
 AddEventHandler('txAdmin:events:playerWarned', function(eventData)
-    local idName = GetPlayerName(evendData.target) or "Unknown Player"
+    local idName = GetPlayerName(eventData.target) or "Unknown Player"
     local reason = eventData.reason or "No reason provided"
     local author = eventData.author or "Unknown Moderator"
     local actionId = eventData.actionId or "N/A"
@@ -37,11 +37,11 @@ AddEventHandler('txAdmin:events:playerWarned', function(eventData)
             title = "__Player Warned__",
             color = 15445283,
             fields = {
-                { name = "Player", value = idName, inline = false },
-                { name = "Player ID", value = tostring(eventData.target), inline = false },
-                { name = "Reason", value = reason, inline = false },
-                { name = "Moderator", value = author, inline = false },
-                { name = "Action ID", value = actionId, inline = false }
+                { name = "Player", value = idName, inline = true },
+                { name = "Player ID", value = tostring(eventData.target), inline = true },
+                { name = "Reason", value = reason, inline = true },
+                { name = "Moderator", value = author, inline = true },
+                { name = "Action ID", value = actionId, inline = true }
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -65,14 +65,14 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData)
 
     local embed = {
         {
-            title = "__Player Banned__",
+            title = "Player Banned",
             color = 16711680,
             fields = {
-                { name = "Player", value = idName, inline = false },
-                { name = "Action ID", value = actionId, inline = false },
-                { name = "Reason", value = reason, inline = false },
-                { name = "Ban Length/Expiry", value = durationInput .. " / " .. expiration, inline = false },
-                { name = "Moderator", value = author, inline = false }
+                { name = "Player", value = idName, inline = true },
+                { name = "Action ID", value = actionId, inline = true },
+                { name = "Reason", value = reason, inline = true },
+                { name = "Ban Length/Expiry", value = durationInput .. " / " .. expiration, inline = true },
+                { name = "Moderator", value = author, inline = true }
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -93,13 +93,13 @@ AddEventHandler('txAdmin:events:playerDirectMessage', function(eventData)
 
     local embed = {
         {
-            title = "__Player DMed__",
+            title = "Player Messaged",
             color = 1900288,
             fields = {
-                { name = "Player", value = idName, inline = false },
-                { name = "Player ID", value = tostring(eventData.target), inline = false },
-                { name = "Message", value = message, inline = false },
-                { name = "Moderator", value = author, inline = false }
+                { name = "Player", value = idName, inline = true },
+                { name = "Player ID", value = tostring(eventData.target), inline = true },
+                { name = "Message", value = message, inline = true },
+                { name = "Moderator", value = author, inline = true }
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -122,14 +122,14 @@ AddEventHandler('txAdmin:events:actionRevoked', function(eventData)
 
     local embed = {
         {
-            title = "__Action Revoked__",
+            title = "Action Revoked",
             color = 1900288,
             fields = {
-                { name = "Player", value = playerName, inline = false },
-                { name = "Action Revoked", value = actionType, inline = false },
-                { name = "Original Reason", value = actionReason, inline = false },
-                { name = "Original Moderator", value = actionAuthor, inline = false },
-                { name = "Revoked By", value = revokedBy, inline = false }
+                { name = "Player", value = playerName, inline = true },
+                { name = "Action Revoked", value = actionType, inline = true },
+                { name = "Original Reason", value = actionReason, inline = true },
+                { name = "Original Moderator", value = actionAuthor, inline = true },
+                { name = "Revoked By", value = revokedBy, inline = true }
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -175,8 +175,8 @@ AddEventHandler('txAdmin:events:announcement', function(eventData)
             title = "Server Announcement",
             color = 5087487,
             fields = {
-                { name = "Author", value = author, inline = false },
-                { name = "Message", value = message, inline = false },
+                { name = "Author", value = author, inline = true },
+                { name = "Message", value = message, inline = true },
             },
             author = { name = "txAdmin Logging System" }
         }
@@ -185,6 +185,46 @@ AddEventHandler('txAdmin:events:announcement', function(eventData)
     PerformHttpRequest(webhook, function(err, text, headers)
         if err ~= 200 then
             print("Failed to send webhook for Announcement: " .. tostring(err))
+        end
+    end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
+end)
+
+-- Server Scheduled Restart Event
+AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
+    local embed = {
+        {
+            title = "Scheduled Restart",
+            color = 5087487,
+            fields = {
+                { name = "", value = eventData.translatedMessage, inline = true },
+            },
+            author = { name = "txAdmin Logging System" }
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers)
+        if err ~= 200 then
+            print("Failed to send webhook for Scheduled Restart: " .. tostring(err))
+        end
+    end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
+end)
+
+-- Server Stopped Event
+AddEventHandler('txAdmin:events:serverShuttingDown', function(eventData)
+    local embed = {
+        {
+            title = "Server Stopped",
+            color = 5087487,
+            fields = {
+                { name = "", value = eventData.author, inline = true },
+            },
+            author = { name = "txAdmin Logging System" }
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers)
+        if err ~= 200 then
+            print("Failed to send webhook for Server Stopped: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
 end)
