@@ -1,7 +1,7 @@
 # txLogs - txAdmin Logging
 A logging system for txAdmin moderation actions.
 ## Installation
-1. Download the latest release from here.
+1. Download the latest release from [here](https://github.com/Solar-Scripts/txLogs/releases/).
 2. Create a folder named "txLogs" in your resources folder.
 3. Drop the contents of the zip into your txLogs folder.
 4. Add the line "ensure txLogs" to your server.cfg file.
