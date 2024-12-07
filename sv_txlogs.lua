@@ -19,7 +19,7 @@ AddEventHandler('txAdmin:events:playerKicked', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Player Kicked: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -48,7 +48,7 @@ AddEventHandler('txAdmin:events:playerWarned', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Player Warned: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -79,7 +79,7 @@ AddEventHandler('txAdmin:events:playerBanned', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Player Banned: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -106,7 +106,7 @@ AddEventHandler('txAdmin:events:playerDirectMessage', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Player DMed: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -136,7 +136,7 @@ AddEventHandler('txAdmin:events:actionRevoked', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Action Revoked: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -158,7 +158,7 @@ AddEventHandler('txAdmin:events:healedPlayer', function(eventData)
     }
 
     PerformHttpRequest(modWebhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Player Healed: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -183,7 +183,7 @@ AddEventHandler('txAdmin:events:announcement', function(eventData)
     }
 
     PerformHttpRequest(webhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Announcement: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -203,7 +203,7 @@ AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
     }
 
     PerformHttpRequest(webhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Scheduled Restart: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
@@ -223,7 +223,7 @@ AddEventHandler('txAdmin:events:serverShuttingDown', function(eventData)
     }
 
     PerformHttpRequest(webhook, function(err, text, headers)
-        if err ~= 200 then
+        if err ~= 204 then
             print("Failed to send webhook for Server Stopped: " .. tostring(err))
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
