@@ -1,3 +1,29 @@
+-- Server/Resource Start Event
+AddEventHandler('onResourceStart', function(resourceName)
+    if (GetCurrentResourceName() ~= resourceName) then
+        return
+    end
+
+    local embed = {
+        {
+            title = "__Server Resource Started__",
+            description = "The txAdmin logging system has been initialized",
+            color = 3066993, -- Green color
+            fields = {
+                { name = "Resource", value = resourceName, inline = true },
+                { name = "Time", value = os.date("%Y-%m-%d %H:%M:%S"), inline = true }
+            },
+            author = { name = "txAdmin Logging System" }
+        }
+    }
+
+    PerformHttpRequest(webhook, function(err, text, headers)
+        if err ~= 204 then
+            print("Failed to send webhook for Server Start: " .. tostring(err))
+        end
+    end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
+end)
+
 -- Player Kicked Event
 AddEventHandler('txAdmin:events:playerKicked', function(eventData)
     local idName = GetPlayerName(eventData.target) or "Unknown Player"
@@ -163,7 +189,6 @@ AddEventHandler('txAdmin:events:healedPlayer', function(eventData)
         end
     end, 'POST', json.encode({ embeds = embed }), { ['Content-Type'] = 'application/json' })
 end)
-
 
 -- Server Announcement Event
 AddEventHandler('txAdmin:events:announcement', function(eventData)
